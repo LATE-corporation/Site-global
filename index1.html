@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Bibliothèque d'E-books</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fc;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .search-bar {
+            width: 95%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .filter {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 2px solid #ccc;
+            background-color: #fff;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .ebook {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .ebook img {
+            width: 80px;
+            height: auto;
+            border-radius: 5px;
+        }
+        .ebook .info {
+            flex-grow: 1;
+            padding: 0 15px;
+            text-align: left;
+        }
+        .ebook .price {
+            font-weight: bold;
+            color: #ff6600;
+        }
+        .buy-button {
+            padding: 10px 15px;
+            background: #0056b3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Ma Bibliothèque d'E-books</h1>
+        <input type="text" class="search-bar" placeholder="🔍 Rechercher un e-book..." onkeyup="searchBooks()">
+        <select class="filter" onchange="sortBooks()">
+            <option value="asc">📈 Prix croissant</option>
+            <option value="desc">📉 Prix décroissant</option>
+        </select>
+        <div id="ebook-list">
+            <!-- Les e-books seront affichés ici -->
+        </div>
+    </div>
+    <script>
+        const ebooks = [
+            { title: "Maîtriser ChatGPT", price: 7.49, image: "image/pp.jpg", link: "https://late-corporation.github.io/e-book-late/" },
+        ];
+
+        function displayBooks() {
+            const list = document.getElementById("ebook-list");
+            list.innerHTML = "";
+            ebooks.forEach(book => {
+                list.innerHTML += `
+                    <div class="ebook">
+                        <img src="${book.image}" alt="${book.title}">
+                        <div class="info">
+                            <h3>${book.title}</h3>
+                            <p class="price">${book.price.toFixed(2)}€</p>
+                        </div>
+                        <a href="${book.link}" class="buy-button">Acheter</a>
+                    </div>
+                `;
+            });
+        }
+        
+        function searchBooks() {
+            const searchValue = document.querySelector(".search-bar").value.toLowerCase();
+            const filtered = ebooks.filter(book => book.title.toLowerCase().includes(searchValue));
+            document.getElementById("ebook-list").innerHTML = "";
+            filtered.forEach(book => {
+                document.getElementById("ebook-list").innerHTML += `
+                    <div class="ebook">
+                        <img src="${book.image}" alt="${book.title}">
+                        <div class="info">
+                            <h3>${book.title}</h3>
+                            <p class="price">${book.price.toFixed(2)}€</p>
+                        </div>
+                        <a href="${book.link}" class="buy-button">Acheter</a>
+                    </div>
+                `;
+            });
+        }
+        
+        function sortBooks() {
+            const order = document.querySelector(".filter").value;
+            ebooks.sort((a, b) => order === "asc" ? a.price - b.price : b.price - a.price);
+            displayBooks();
+        }
+        
+        displayBooks();
+    </script>
+</body>
+</html>
