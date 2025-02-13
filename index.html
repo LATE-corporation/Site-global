@@ -9,19 +9,19 @@
             font-family: 'Poppins', sans-serif;
             background-color: #f8f9fa;
             text-align: center;
-            padding: 40px;
+            padding: 20px;
             color: #333;
         }
         .container {
             max-width: 900px;
             margin: auto;
             background: white;
-            padding: 30px;
+            padding: 20px;
             border-radius: 12px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
         .search-bar {
-            width: 100%;
+            width: calc(100% - 20px);
             padding: 12px;
             margin-bottom: 20px;
             border: 1px solid #ddd;
@@ -49,19 +49,21 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px;
+            padding: 15px;
             border-bottom: 1px solid #eee;
+            flex-wrap: wrap;
         }
         .ebook img {
-            width: 80px;
+            width: 70px;
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         .ebook .info {
             flex-grow: 1;
-            padding: 0 20px;
+            padding: 0 15px;
             text-align: left;
+            min-width: 150px;
         }
         .ebook .price {
             font-weight: bold;
@@ -69,7 +71,7 @@
             font-size: 18px;
         }
         .buy-button {
-            padding: 10px 20px;
+            padding: 10px 15px;
             background: #ff6600;
             color: white;
             text-decoration: none;
@@ -77,10 +79,26 @@
             font-weight: bold;
             transition: 0.3s;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            white-space: nowrap;
         }
         .buy-button:hover {
             background: #cc5200;
             transform: scale(1.05);
+        }
+        @media (max-width: 600px) {
+            .ebook {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .ebook img {
+                width: 100px;
+                margin-bottom: 10px;
+            }
+            .buy-button {
+                width: 100%;
+                margin-top: 10px;
+            }
         }
     </style>
 </head>
